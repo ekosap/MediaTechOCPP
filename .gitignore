@@ -243,6 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/InfiraWebApp/Styles/images/upload
-/InfiraWebApp/App_Data/RadUploadTemp
 *.xlsx
