@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-MediaTech-3629E956-16CF-4505-B5BE-2E9AB66D0C17</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\assets\js\login\plugins - Copy %282%29.bundle.min.js">
+      <DependentUpon>plugins.bundle.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\assets\js\login\plugins - Copy - Copy.bundle.min.js">
+      <DependentUpon>plugins - Copy.bundle.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\assets\js\login\plugins - Copy.bundle.min.js">
+      <DependentUpon>plugins.bundle.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+
+</Project>
