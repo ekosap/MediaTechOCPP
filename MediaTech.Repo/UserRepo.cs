@@ -22,5 +22,30 @@ namespace MediaTech.Repo
                    UserId = x.UserId 
             }).ToList(); 
         }
+
+
+        public UserViewModel GetUserAdmin()
+        {
+            var data = new UserViewModel();
+            data.ListUser = (from User in db.User
+                       where(User.UserId == 1)
+                       select new UserViewModel {
+                            UserId      = User.UserId,     
+                            Name        = User.Name,       
+                            Address     = User.Address,    
+                            Phone       = User.Phone,      
+                            Email       = User.Email,      
+                            UserName    = User.UserName,   
+                            Password    = User.Password,   
+                            CreatedDate = User.CreatedDate,
+                            CreatedBy   = User.CreatedBy,  
+                            ModifyDate  = User.ModifyDate, 
+                            ModifyBy    = User.ModifyBy,   
+                            RoleId      = User.RoleId,     
+                            Status      = User.Status,
+                       }).ToList();
+
+            return data;
+        }
     }
 }
