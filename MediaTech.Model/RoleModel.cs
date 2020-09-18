@@ -11,9 +11,9 @@ namespace MediaTech.Model
         public long RoleID { get; set; }
         public string RoleName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
         public DateTime? ModifyDate { get; set; }
-        public string ModifyBy { get; set; }
+        public int ModifyBy { get; set; }
         public bool Status { get; set; }
     }
 }
