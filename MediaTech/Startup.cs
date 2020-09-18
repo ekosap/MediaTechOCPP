@@ -12,6 +12,7 @@ using MediaTech.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MediaTech.Model;
 
 namespace MediaTech
 {
@@ -62,7 +63,7 @@ namespace MediaTech
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

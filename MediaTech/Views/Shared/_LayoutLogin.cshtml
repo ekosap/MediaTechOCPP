@@ -53,60 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <body id="kt_body"
       class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-    <!--begin::Main-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Login-->
-        <div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
-            <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat"
-                 style="background-image: url('http://209.97.174.250/metronic/assets/media/bg/bg-3.jpg');">
-                <div class="login-form text-center p-7 position-relative overflow-hidden">
-                    <!--begin::Login Header-->
-                    <div class="d-flex flex-center mb-15">
-                        <a href="http://209.97.174.250">
-                            <img src="http://209.97.174.250/images/logo_pertamina.png" class="max-h-75px" alt="" />
-                        </a>
-                    </div>
-                    <!--end::Login Header-->
-                    <!--begin::Login Sign in form-->
-                    <div class="login-signin">
-                        @RenderBody()
-                        <div class="mb-20">
-                            <h3>Sign In To Equipment Readiness</h3>
-                            <div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
-                        </div>
-                        <form class="form" action="http://209.97.174.250/login" method="POST">
-                            <input type="hidden" name="_token" value="PMBdFIN3G28x3zNDjYghIQWNS5zIwND7rxqB3R9j">                        <input type="hidden" name="_method" value="POST">                        <div class="form-group mb-5">
-                                <input class="form-control h-auto form-control-solid py-4 px-8" type="text"
-                                       placeholder="Email" name="email" autocomplete="off" />
-                            </div>
-                            <div class="form-group mb-5">
-                                <input class="form-control h-auto form-control-solid py-4 px-8" type="password"
-                                       placeholder="Password" name="password" />
-                            </div>
-                            <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-                                <div class="checkbox-inline">
-                                    <label class="checkbox m-0 text-muted">
-                                        <input type="checkbox" name="remember" />
-                                        <span></span>
-                                        Remember me
-                                    </label>
-                                </div>
-
-                            </div>
-                            <button id="kt_login_signin_submit"
-                                    class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
-                                Sign In
-                            </button>
-                        </form>
-                    </div>
-                    <!--end::Login Sign in form-->
-
-                </div>
-            </div>
-        </div>
-        <!--end::Login-->
-    </div>
-    <!--end::Main-->
+    @RenderBody()
 
 
     <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>

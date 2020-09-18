@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaTech", "MediaTech\MediaTech.csproj", "{2DC6A2C3-A94D-4E1F-AB56-49E38259D673}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTech.Model", "MediaTech.Model\MediaTech.Model.csproj", "{003A044E-0815-4375-85B7-42BEFF17D5B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaTech.Model", "MediaTech.Model\MediaTech.Model.csproj", "{003A044E-0815-4375-85B7-42BEFF17D5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTech.ViewModel", "MediaTech.ViewModel\MediaTech.ViewModel.csproj", "{93F3B246-8DA4-4F7B-9EA6-EC8BC528FDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTech.Repo", "MediaTech.Repo\MediaTech.Repo.csproj", "{A76E5A2C-3E35-485E-8704-7836F2BE88E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{003A044E-0815-4375-85B7-42BEFF17D5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{003A044E-0815-4375-85B7-42BEFF17D5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{003A044E-0815-4375-85B7-42BEFF17D5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93F3B246-8DA4-4F7B-9EA6-EC8BC528FDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F3B246-8DA4-4F7B-9EA6-EC8BC528FDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F3B246-8DA4-4F7B-9EA6-EC8BC528FDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F3B246-8DA4-4F7B-9EA6-EC8BC528FDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A76E5A2C-3E35-485E-8704-7836F2BE88E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A76E5A2C-3E35-485E-8704-7836F2BE88E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A76E5A2C-3E35-485E-8704-7836F2BE88E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A76E5A2C-3E35-485E-8704-7836F2BE88E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

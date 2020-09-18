@@ -5,7 +5,7 @@ using MediaTech.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaTech.Data
+namespace MediaTech.Model
 {
     public class ApplicationDbContext : IdentityDbContext
     {
