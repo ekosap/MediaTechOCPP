@@ -15,7 +15,7 @@ namespace MediaTech.Model
         }
         public DbSet<RoleModel> Role { get; set; }
         public DbSet<UserModel> User { get; set; }
-        public DbSet<LocationModel> Location { get; set; }
+        public DbSet<SPKLUModel> SPKLU { get; set; }
         public DbSet<UserLocationModel> UserLocation { get; set; }
     }
 }
