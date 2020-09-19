@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MediaTech.ViewModel.SPKLUViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 mt-0 p-0">
+    <div class="card">
+        <div class="card-header">
+            <h2>Dashboard SPKLU Management</h2>
+            <a asp-action="Create" class="btn btn-success btn-sm pull-right">Create New</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SPKLUName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsACType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Alamat)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is null)
+                    {
+                        <tr><td>No Data Record</td></tr>
+                    }
+                    else
+                    {
+                        var a = 0;
+                        @foreach (var item in Model)
+                        {
+                            a++;
+                            <tr>
+                                <td>
+                                    @(a)
+                                </td>
+                                <td>
+                                    @item.SPKLUName
+                                </td>
+                                <td>
+                                    @item.CreatedDate.ToString("dd-MM-yyyy")
+                                </td>
+                                <td>
+                                    @item.CreatedBy
+                                </td>
+                                <td>
+                                    @(item.Status ? "Active" : "Non-Active")
+                                </td>
+                                <td>
+                                    @(item.IsACType ? "AC Type" : "DC Type")
+                                </td>
+                                <td>
+                                    @item.Alamat
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

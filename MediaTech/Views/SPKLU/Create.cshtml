@@ -1,0 +1,43 @@
+﻿@model MediaTech.ViewModel.SPKLUViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="col-md-6">
+        <form asp-action="Create" class="form form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="SPKLUName" class="col-form-label col-4"></label>
+                <input asp-for="SPKLUName" class="form-control col-8" />
+                <span asp-validation-for="SPKLUName" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4"> SKPLU Status</label>
+                <label class="form-check-label col-8">
+                    <input class="form-check-input" asp-for="Status" /> Active
+                </label>
+            </div>
+            <div class="form-group  row">
+                <label class="col-form-label col-4">SPKLU Type</label>
+                <label class="form-check-label col-8">
+                    <input class="form-check-input" asp-for="IsACType" /> AC Types
+                </label>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Alamat" class="col-form-label col-4"></label>
+                <textarea asp-for="Alamat" class="form-control col-8" type="text"></textarea>
+                <span asp-validation-for="Alamat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
