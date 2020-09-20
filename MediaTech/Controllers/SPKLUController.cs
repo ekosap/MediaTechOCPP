@@ -39,7 +39,7 @@ namespace MediaTech.Controllers
             if (ModelState.IsValid)
             {
                 var result = await repo.Insert(model);
-                if (result) return RedirectToAction("index");
+                if (result.Code == 200) return RedirectToAction("index");
             }
             return View(model);
         }

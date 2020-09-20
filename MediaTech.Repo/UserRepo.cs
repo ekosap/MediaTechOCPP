@@ -1,7 +1,5 @@
 ﻿using MediaTech.ViewModel;
-using System;
 using MediaTech.Model;
-using MediaTech.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 

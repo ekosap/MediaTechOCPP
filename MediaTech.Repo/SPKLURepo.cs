@@ -34,10 +34,12 @@ namespace MediaTech.Repo
             }).ToList();
             return hasil;
         }
-        public async Task<bool> Insert(SPKLUViewModel data)
+        public async Task<MetadataViewModel> Insert(SPKLUViewModel data)
         {
             try
             {
+                var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName)).ToListAsync();
+                if (dataDB.Count > 0) { return new MetadataViewModel() { Code = 201, Message = "Duplication Data" }; }
                 _db.SPKLU.Add(new SPKLUModel()
                 {
                     Alamat = data.Alamat,
@@ -48,11 +50,11 @@ namespace MediaTech.Repo
                     Status = data.Status
                 });
                 await _db.SaveChangesAsync();
-                return true;
+                return new MetadataViewModel() { Code = 200, Message = "Success" };
             }
             catch (Exception e)
             {
-                return false;
+                return new MetadataViewModel() { Code = 400, Message = e.Message };
             }
         }
     }
