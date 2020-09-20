@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,11 +35,29 @@ namespace MediaTech.Repo
             }).ToList();
             return hasil;
         }
+        public async Task<SPKLUViewModel> GetByID(long ID)
+        {
+            SPKLUViewModel hasil = new SPKLUViewModel();
+            var data = await _db.SPKLU.Where(x => x.SPKLUId == ID).FirstOrDefaultAsync();
+            if(data != null)
+            {
+                hasil.SPKLUId = data.SPKLUId;
+                hasil.SPKLUName = data.SPKLUName;
+                hasil.Status = data.Status;
+                hasil.Alamat = data.Alamat;
+                hasil.CreatedBy = data.CreatedBy;
+                hasil.CreatedDate = data.CreatedDate;
+                hasil.IsACType = data.IsACType;
+                hasil.ModifyBy = data.ModifyBy;
+                hasil.ModifyDate = data.ModifyDate;
+            }
+            return hasil;
+        }
         public async Task<MetadataViewModel> Insert(SPKLUViewModel data)
         {
             try
             {
-                var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName)).ToListAsync();
+                var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName) && x.IsACType == data.IsACType).ToListAsync();
                 if (dataDB.Count > 0) { return new MetadataViewModel() { Code = 201, Message = "Duplication Data" }; }
                 _db.SPKLU.Add(new SPKLUModel()
                 {

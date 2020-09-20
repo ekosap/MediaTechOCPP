@@ -26,6 +26,12 @@ namespace MediaTech.Controllers
             var result = await spklu.GetAll();
             return View(result);
         }
+        public async Task<IActionResult> Details(string id)
+        {
+            var spklu = new SPKLURepo(_db); SPKLUViewModel result = new SPKLUViewModel();
+            string paramID = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(id)); long ID; if (long.TryParse(paramID, out ID)) result = await spklu.GetByID(ID);
+            return View(result);
+        }
         public IActionResult Create()
         {
             return View();
@@ -43,5 +49,6 @@ namespace MediaTech.Controllers
             }
             return View(model);
         }
+
     }
 }

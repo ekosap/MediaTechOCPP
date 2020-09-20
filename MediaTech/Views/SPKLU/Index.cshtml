@@ -72,9 +72,9 @@
                                     @item.Alamat
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                    @Html.ActionLink("Edit", "Edit", new { id=Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) }) |
+                                    @Html.ActionLink("Details", "Details", new { id = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) })
                                 </td>
                             </tr>
                         }

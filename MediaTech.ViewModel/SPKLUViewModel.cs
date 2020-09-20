@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MediaTech.ViewModel
@@ -9,6 +10,7 @@ namespace MediaTech.ViewModel
     {
         public int SPKLUId { get; set; }
         [DisplayName("SPKLU Name")]
+        [Required]
         public string SPKLUName { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }

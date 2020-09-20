@@ -4,8 +4,9 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <div class="col-md-6">
+<div class="card ml-10 mt-n20 col-md-6">
+    <div class="card-body">
+        <h5 class="card-title">Input Data SPKLU</h5>
         <form asp-action="Create" class="form form-horizontal">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group row">
@@ -30,14 +31,16 @@
                 <textarea asp-for="Alamat" class="form-control col-8" type="text"></textarea>
                 <span asp-validation-for="Alamat" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-bg-dark text-white">Back to List</a>
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
 
