@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediaTech.Data;
 using MediaTech.Model;
 using MediaTech.Repo;
 using MediaTech.ViewModel;
@@ -28,8 +29,11 @@ namespace MediaTech.Controllers
         }
         public async Task<IActionResult> Details(string id)
         {
-            var spklu = new SPKLURepo(_db); SPKLUViewModel result = new SPKLUViewModel();
-            string paramID = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(id)); long ID; if (long.TryParse(paramID, out ID)) result = await spklu.GetByID(ID);
+            SPKLUViewModel result = new SPKLUViewModel();
+            if (string.IsNullOrWhiteSpace(id)) return View(result);
+
+            var spklu = new SPKLURepo(_db); 
+            string paramID = id.FromBase64();  if (long.TryParse(paramID, out long ID)) result = await spklu.GetByID(ID);
             return View(result);
         }
         public IActionResult Create()

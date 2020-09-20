@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MediaTech.ViewModel.SPKLUViewModel>
-
+@using MediaTech.Data;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -72,9 +72,9 @@
                                     @item.Alamat
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id=Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) }) |
-                                    @Html.ActionLink("Details", "Details", new { id = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(item.SPKLUId.ToString())) })
+                                    @Html.ActionLink("Edit", "Edit", new { id=item.SPKLUId.ToString().ToBase64() }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.SPKLUId.ToString().ToBase64() }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.SPKLUId.ToString().ToBase64() })
                                 </td>
                             </tr>
                         }
