@@ -27,6 +27,12 @@ namespace MediaTech.Controllers
             var result = await spklu.GetAll();
             return View(result);
         }
+        public async Task<IActionResult> List()
+        {
+            var spklu = new SPKLURepo(_db);
+            var result = await spklu.GetAll();
+            return PartialView("_List",result);
+        }
         public async Task<IActionResult> Details(string id)
         {
             SPKLUViewModel result = new SPKLUViewModel();
@@ -34,11 +40,11 @@ namespace MediaTech.Controllers
 
             var spklu = new SPKLURepo(_db); 
             string paramID = id.FromBase64();  if (long.TryParse(paramID, out long ID)) result = await spklu.GetByID(ID);
-            return View(result);
+            return PartialView("_Details", result);
         }
-        public IActionResult Create()
+        public IActionResult Add()
         {
-            return View();
+            return PartialView("_Create");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -49,9 +55,19 @@ namespace MediaTech.Controllers
             if (ModelState.IsValid)
             {
                 var result = await repo.Insert(model);
-                if (result.Code == 200) return RedirectToAction("index");
+                result.Success = true;
+                return Json(result);
             }
-            return View(model);
+            return PartialView("_Create",model);
+        }
+        public async Task<IActionResult> Edit(string id)
+        {
+            SPKLUViewModel result = new SPKLUViewModel();
+            if (string.IsNullOrWhiteSpace(id)) return View(result);
+
+            var spklu = new SPKLURepo(_db);
+            string paramID = id.FromBase64(); if (long.TryParse(paramID, out long ID)) result = await spklu.GetByID(ID);
+            return PartialView("_Edit", result);
         }
 
     }

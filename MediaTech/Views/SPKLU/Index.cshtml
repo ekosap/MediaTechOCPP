@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<MediaTech.ViewModel.SPKLUViewModel>
-@using MediaTech.Data;
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-fluid col-md-12 mt-n20">
+    <div id="alert"></div>
     <div class="card">
         <div class="d-flex justify-content-between card-header">
             <h2>Dashboard SPKLU Management</h2>
-            <a asp-action="Create" class="btn btn-success btn-sm">Create New</a>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-add" style="width:80px">Add</button>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
+            <table class="table table-striped table-bordered" id="tb_detail">
+                <thead>
                     <tr>
                         <th>
                             No
@@ -38,50 +39,140 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @if (Model is null)
-                    {
-                        <tr><td>No Data Record</td></tr>
-                    }
-                    else
-                    {
-                        var a = 0;
-                        @foreach (var item in Model)
-                        {
-                            a++;
-                            <tr>
-                                <td>
-                                    @(a)
-                                </td>
-                                <td>
-                                    @item.SPKLUName
-                                </td>
-                                <td>
-                                    @item.CreatedDate.ToString("dd-MM-yyyy")
-                                </td>
-                                <td>
-                                    @item.CreatedBy
-                                </td>
-                                <td>
-                                    @(item.Status ? "Active" : "Non-Active")
-                                </td>
-                                <td>
-                                    @(item.IsACType ? "AC Type" : "DC Type")
-                                </td>
-                                <td>
-                                    @item.Alamat
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id=item.SPKLUId.ToString().ToBase64() }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.SPKLUId.ToString().ToBase64() }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.SPKLUId.ToString().ToBase64() })
-                                </td>
-                            </tr>
-                        }
-                    }
+                <tbody id="list-data">
+                    @Html.Partial("_List", Model)
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-input" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
 
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            
+        });
+        function loadData() {
+            $.ajax({
+                url: '@Url.Action("List")',
+                dataType: 'html',
+                type: 'get',
+                success: function (x) {
+                    $("#list-data").html(x);
+                }
+            });
+        }
+        $("#btn-add").click(function () {
+            $.ajax({
+                url: '@Url.Action("Add")',
+                dataType: 'html',
+                type: 'get',
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-detail", function () {
+            $.ajax({
+                url: '@Url.Action("Details")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-edit", function () {
+            $.ajax({
+                url: '@Url.Action("Edit")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-hapus", function () {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-lg");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-sm");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#modal-input").on("click", "#btn-cancel", function () {
+            $("#modal-input").modal('hide');
+        });
+        $("#modal-input").on("submit", "#form-input", function () {
+            $.ajax({
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                type: 'POST',
+                success: function (s) {
+                    if (s.success) {
+                        $("#modal-input").modal('hide');
+                        //$("#alert").addClass(data.vclass);
+                        $("#alert").fadeOut(5000).html(s.message);
+                        loadData();
+                    }
+                    else {
+                        $("#modal-input").find(".modal-content").html(data);
+                        //$("#modal-input").modal('show');
+                    }
+                }
+            });
+            return false;
+        });
+        function cekData() {
+            var ini = $('#modal-input').find('#username').val();
+            $.ajax({
+                url: '@Url.Action("CheckNama","Ajax")',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    nama: ini
+                },
+                success: function (x) {
+                    if (x.data == true) {
+                        swal({
+                            type: x.alertType,
+                            title: x.alertStrong,
+                            html: x.alertMessage,
+                            footer: ''
+                        });
+                    }
+                }
+            });
+            return false;
+        }
+        $("#tb-input").find("#tr-input").find("#col5-filter").datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+        $(".select2").select2();
+    </script>
+}
