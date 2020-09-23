@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MediaTech.ViewModel.SPKLUViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "SPKLU Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-fluid col-md-12 mt-n20">
@@ -117,8 +117,8 @@
                 type: 'get',
                 data: { id: $(this).val() },
                 success: function (x) {
-                    $("#modal-input").find(".modal-dialog").removeClass("modal-lg");
-                    $("#modal-input").find(".modal-dialog").addClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
                     $("#modal-input").find(".modal-content").html(x);
                     $("#modal-input").modal('show');
                 }

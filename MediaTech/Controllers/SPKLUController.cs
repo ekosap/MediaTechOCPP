@@ -83,5 +83,28 @@ namespace MediaTech.Controllers
             }
             return PartialView("_Edit", model);
         }
+        public async Task<IActionResult> Delete(string id)
+        {
+            SPKLUViewModel result = new SPKLUViewModel();
+            if (string.IsNullOrWhiteSpace(id)) return View(result);
+
+            var spklu = new SPKLURepo(_db);
+            string paramID = id.FromBase64(); if (long.TryParse(paramID, out long ID)) result = await spklu.GetByID(ID);
+            return PartialView("_Delete", result);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(SPKLUViewModel model)
+        {
+            var repo = new SPKLURepo(_db);
+            model.CreatedBy = 0; model.CreatedDate = DateTime.Now; model.ModifyBy = 1; model.ModifyDate = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                var result = await repo.Delete(model);
+                result.Success = true;
+                return Json(result);
+            }
+            return PartialView("_Delete", model);
+        }
     }
 }

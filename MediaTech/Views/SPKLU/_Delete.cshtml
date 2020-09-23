@@ -1,11 +1,11 @@
 ﻿@model MediaTech.ViewModel.SPKLUViewModel
 
 
-<form asp-action="Edit" class="form form-horizontal" id="form-input">
+<form asp-action="Delete" class="form form-horizontal" id="form-input">
     <div class="modal-header">
-        <h5 class="modal-title">Update Data SPKLU</h5>
+        <h5 class="modal-title">Delete Data SPKLU ?</h5>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="pointer-events:none">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="SPKLUId" type="hidden" class="form-control col-8" />
         <div class="form-group row">
@@ -30,10 +30,10 @@
             <textarea asp-for="Alamat" class="form-control col-8" type="text"></textarea>
             <span asp-validation-for="Alamat" class="text-danger"></span>
         </div>
-        <div class="modal-footer">
-            <input type="submit" value="Update" class="btn btn-primary" />
-            <button type="button" class="btn btn-bg-dark text-white" id="btn-cancel">Cancel</button>
-        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <button type="button" class="btn btn-bg-dark text-white" id="btn-cancel">Cancel</button>
     </div>
 </form>
 @await Html.PartialAsync("_ValidationScriptsPartial");

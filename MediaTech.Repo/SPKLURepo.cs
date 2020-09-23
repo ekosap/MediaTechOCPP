@@ -97,5 +97,21 @@ namespace MediaTech.Repo
                 return new MetadataViewModel() { Code = 400, Message = e.Message };
             }
         }
+
+        public async Task<MetadataViewModel> Delete(SPKLUViewModel data)
+        {
+            try
+            {
+                var dataDB = await _db.SPKLU.Where(x => x.SPKLUId == data.SPKLUId).FirstOrDefaultAsync();
+                if (dataDB == null) { return new MetadataViewModel() { Code = 404, Message = "Data Not Found" }; }
+                _db.SPKLU.Remove(dataDB);
+                await _db.SaveChangesAsync();
+                return new MetadataViewModel() { Code = 200, Message = "Success" };
+            }
+            catch (Exception e)
+            {
+                return new MetadataViewModel() { Code = 400, Message = e.Message };
+            }
+        }
     }
 }
