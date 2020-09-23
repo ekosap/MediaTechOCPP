@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.Alamat)
         </td>
 
-        <td style="width:80; justify-content:space-between; display:flex">
+        <td style="justify-content:space-between; display:flex">
             <button type="button" id="btn-detail" value="@item.SPKLUId.ToString().ToBase64()" class="btn btn-sm btn-info"><i class="fa fa-search"></i></button>
             <button type="button" id="btn-edit" value="@item.SPKLUId.ToString().ToBase64()" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></button>
             <button type="button" id="btn-hapus" value="@item.SPKLUId.ToString().ToBase64()" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>

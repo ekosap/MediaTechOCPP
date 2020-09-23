@@ -39,7 +39,7 @@ namespace MediaTech.Repo
         {
             SPKLUViewModel hasil = new SPKLUViewModel();
             var data = await _db.SPKLU.Where(x => x.SPKLUId == ID).FirstOrDefaultAsync();
-            if(data != null)
+            if (data != null)
             {
                 hasil.SPKLUId = data.SPKLUId;
                 hasil.SPKLUName = data.SPKLUName;
@@ -68,6 +68,27 @@ namespace MediaTech.Repo
                     SPKLUName = data.SPKLUName,
                     Status = data.Status
                 });
+                await _db.SaveChangesAsync();
+                return new MetadataViewModel() { Code = 200, Message = "Success" };
+            }
+            catch (Exception e)
+            {
+                return new MetadataViewModel() { Code = 400, Message = e.Message };
+            }
+        }
+        public async Task<MetadataViewModel> Update(SPKLUViewModel data)
+        {
+            try
+            {
+                var dataDB = await _db.SPKLU.Where(x => x.SPKLUId == data.SPKLUId).FirstOrDefaultAsync();
+                if (dataDB == null) { return new MetadataViewModel() { Code = 404, Message = "Data Not Found" }; }
+                dataDB.SPKLUId = data.SPKLUId;
+                dataDB.Alamat = data.Alamat;
+                dataDB.ModifyBy = data.ModifyBy;
+                dataDB.ModifyDate = data.ModifyDate;
+                dataDB.IsACType = data.IsACType;
+                dataDB.SPKLUName = data.SPKLUName;
+                dataDB.Status = data.Status;
                 await _db.SaveChangesAsync();
                 return new MetadataViewModel() { Code = 200, Message = "Success" };
             }

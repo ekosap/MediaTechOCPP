@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody id="list-data">
-                    @Html.Partial("_List", Model)
+                    @await Html.PartialAsync("_List", Model);
                 </tbody>
             </table>
         </div>
@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script>
         $(document).ready(function () {
@@ -141,7 +142,7 @@
                     }
                     else {
                         $("#modal-input").find(".modal-content").html(data);
-                        //$("#modal-input").modal('show');
+                        $("#modal-input").modal('show');
                     }
                 }
             });

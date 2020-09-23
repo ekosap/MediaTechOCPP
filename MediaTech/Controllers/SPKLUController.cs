@@ -69,6 +69,19 @@ namespace MediaTech.Controllers
             string paramID = id.FromBase64(); if (long.TryParse(paramID, out long ID)) result = await spklu.GetByID(ID);
             return PartialView("_Edit", result);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(SPKLUViewModel model)
+        {
+            var repo = new SPKLURepo(_db);
+            model.CreatedBy = 0; model.CreatedDate = DateTime.Now; model.ModifyBy = 1; model.ModifyDate = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                var result = await repo.Update(model);
+                result.Success = true;
+                return Json(result);
+            }
+            return PartialView("_Edit", model);
+        }
     }
 }
