@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediaTech.Model;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MediaTech
 {
@@ -35,6 +36,19 @@ namespace MediaTech
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSession(x=> x.IdleTimeout = TimeSpan.FromSeconds(1800));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Login/Index";
+                options.Cookie.Name = "OCPPCookie";
+            });
+                        
+
+
+                        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +71,12 @@ namespace MediaTech
             app.UseRouting();
 
             app.UseAuthentication();
+
+         
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

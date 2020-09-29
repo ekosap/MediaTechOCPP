@@ -7,9 +7,13 @@ using MediaTech.Model;
 using MediaTech.ViewModel;
 using MediaTech.Repo;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MediaTech.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
 
@@ -22,11 +26,17 @@ namespace MediaTech.Controllers
             db = _db;
         }
 
+        [Authorize]
         public IActionResult AdminIndex()
         {
+
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+            ViewBag.StringRole = HttpContext.Session.GetString("StringRole");
+            ViewBag.Email = HttpContext.Session.GetString("Email");
             var model = new UserViewModel();
             var repo = new UserRepo(db);
             model = repo.GetUserAdmin();
+            
             return View(model);
         }
     }

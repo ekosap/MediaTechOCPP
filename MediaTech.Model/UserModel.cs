@@ -20,7 +20,7 @@ namespace MediaTech.Model
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? ModifyDate { get; set; }
-        public int ModifyBy { get; set; }
+        public int? ModifyBy { get; set; }
         public int RoleId { get; set; }
         public bool Status { get; set; }
     }
