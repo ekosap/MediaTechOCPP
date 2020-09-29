@@ -29,6 +29,43 @@
             <textarea asp-for="Alamat" class="form-control col-8" type="text"></textarea>
             <span asp-validation-for="Alamat" class="text-danger"></span>
         </div>
+        <div class="form-group row">
+            <label asp-for="MapLocation" class="col-form-label col-4"></label>
+            <textarea asp-for="MapLocation" class="form-control col-8" type="text"></textarea>
+            <span asp-validation-for="MapLocation" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ListJamOperational" class="col-form-label"></label>
+            <table id="tblCustomers" class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:150px">Start At</th>
+                        <th style="width:150px">Close At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ListJamOperational.Count > 0)
+                    {
+                        @foreach (var customer in Model.ListJamOperational)
+                        {
+                            <tr>
+                                <td>@customer.StartAt</td>
+                                <td>@customer.FinishAt</td>
+                                <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="time" id="txtStartAt" /></td>
+                        <td><input type="time" id="txtFinishAt" /></td>
+                        <td><input type="button" id="btnAdd" value="Add" /></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
         <div class="modal-footer">
             <input type="submit" value="Save" class="btn btn-primary" />
             <button type="button" class="btn btn-bg-dark text-white" id="btn-cancel">Cancel</button>

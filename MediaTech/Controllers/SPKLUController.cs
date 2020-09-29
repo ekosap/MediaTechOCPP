@@ -44,12 +44,16 @@ namespace MediaTech.Controllers
         }
         public IActionResult Add()
         {
-            return PartialView("_Create");
+            SPKLUViewModel model = new SPKLUViewModel();
+            model.ListJamOperational = new List<JamOperationalViewModel>();
+            return PartialView("_Create", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SPKLUViewModel model)
+        public async Task<IActionResult> Create(SPKLUViewModel model, string ListJamOperational)
         {
+            List<JamOperationalViewModel> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<JamOperationalViewModel>>(ListJamOperational);
+            model.ListJamOperational = data;
             var repo = new SPKLURepo(_db);
             model.CreatedBy = 0; model.CreatedDate = DateTime.Now; model.ModifyBy = 1; model.ModifyDate = DateTime.Now;
             if (ModelState.IsValid)

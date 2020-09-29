@@ -57,8 +57,55 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            
+
         });
+
+        $("#modal-input").on("click", "#btnAdd", function () {
+            //Reference the Name and Country TextBoxes.
+            var txtStartAt = $("#txtStartAt");
+            var txtFinishAt = $("#txtFinishAt");
+
+            //Get the reference of the Table's TBODY element.
+            var tBody = $("#tblCustomers > TBODY")[0];
+
+            //Add Row.
+            var row = tBody.insertRow(-1);
+
+            //Add Name cell.
+            var cell = $(row.insertCell(-1));
+            cell.html(txtStartAt.val());
+
+            //Add Country cell.
+            cell = $(row.insertCell(-1));
+            cell.html(txtFinishAt.val());
+
+            //Add Button cell.
+            cell = $(row.insertCell(-1));
+            var btnRemove = $("<input />");
+            btnRemove.attr("type", "button");
+            btnRemove.attr("onclick", "Remove(this);");
+            btnRemove.val("Remove");
+            cell.append(btnRemove);
+
+            //Clear the TextBoxes.
+            txtStartAt.val("");
+            txtFinishAt.val("");
+        });
+
+        function Remove(button) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(0).html();
+            var close = $("TD", row).eq(1).html();
+            if (confirm("Do you want to delete: Start at " + name + " and close at "+close)) {
+                //Get the reference of the Table.
+                var table = $("#tblCustomers")[0];
+
+                //Delete the Table row using it's Index.
+                table.deleteRow(row[0].rowIndex);
+            }
+        };
+
         function loadData() {
             $.ajax({
                 url: '@Url.Action("List")',
@@ -128,9 +175,18 @@
             $("#modal-input").modal('hide');
         });
         $("#modal-input").on("submit", "#form-input", function () {
+            var dataForm = $(this).serialize();
+            var jps = new Array();
+            $("#tblCustomers TBODY TR").each(function () {
+                var row = $(this);
+                var jp = {};
+                jp.StartAt = row.find("TD").eq(0).html();
+                jp.FinishAt = row.find("TD").eq(1).html();
+                jps.push(jp);
+            });
             $.ajax({
                 url: $(this).attr('action'),
-                data: $(this).serialize(),
+                data: dataForm +"&ListJamOperational="+JSON.stringify(jps),
                 dataType: 'JSON',
                 type: 'POST',
                 success: function (s) {

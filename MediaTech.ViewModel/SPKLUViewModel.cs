@@ -22,5 +22,9 @@ namespace MediaTech.ViewModel
         public bool IsACType { get; set; }
         [DisplayName("SPKLU Address")]
         public string Alamat { get; set; }
+        [DisplayName("Map Location")]
+        public string MapLocation { get; set; }
+        [DisplayName("Operational Time")]
+        public List<JamOperationalViewModel> ListJamOperational { get; set; }
     }
 }

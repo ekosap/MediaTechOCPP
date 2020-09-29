@@ -55,25 +55,43 @@ namespace MediaTech.Repo
         }
         public async Task<MetadataViewModel> Insert(SPKLUViewModel data)
         {
-            try
+            using (var trans = _db.Database.BeginTransaction())
             {
-                var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName) && x.IsACType == data.IsACType).ToListAsync();
-                if (dataDB.Count > 0) { return new MetadataViewModel() { Code = 201, Message = "Duplication Data" }; }
-                _db.SPKLU.Add(new SPKLUModel()
+                try
                 {
-                    Alamat = data.Alamat,
-                    CreatedBy = data.CreatedBy,
-                    CreatedDate = data.CreatedDate,
-                    IsACType = data.IsACType,
-                    SPKLUName = data.SPKLUName,
-                    Status = data.Status
-                });
-                await _db.SaveChangesAsync();
-                return new MetadataViewModel() { Code = 200, Message = "Success" };
-            }
-            catch (Exception e)
-            {
-                return new MetadataViewModel() { Code = 400, Message = e.Message };
+                    var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName) && x.IsACType == data.IsACType).ToListAsync();
+                    if (dataDB.Count > 0) { await trans.RollbackAsync(); return new MetadataViewModel() { Code = 201, Message = "Duplication Data" }; }
+                    SPKLUModel dataSKPLU = new SPKLUModel()
+                    {
+                        Alamat = data.Alamat,
+                        CreatedBy = data.CreatedBy,
+                        CreatedDate = data.CreatedDate,
+                        IsACType = data.IsACType,
+                        SPKLUName = data.SPKLUName,
+                        Status = data.Status
+                    };
+                    _db.SPKLU.Add(dataSKPLU);
+                    await _db.SaveChangesAsync();
+
+                    foreach (JamOperationalViewModel item in data.ListJamOperational)
+                    {
+                        _db.JamOperation.Add(new JamOperasionalModal() { 
+                            FinishAt = item.FinishAt,
+                            StartAt = item.StartAt,
+                            SKPLUID = dataSKPLU.SPKLUId
+                        });
+                        await _db.SaveChangesAsync();
+                    }
+
+                    await trans.CommitAsync();
+                    return new MetadataViewModel() { Code = 200, Message = "Success" };
+                }
+                catch (Exception e)
+                {
+                    await trans.RollbackAsync();
+                    return new MetadataViewModel() { Code = 400, Message = e.Message };
+                }
+
             }
         }
         public async Task<MetadataViewModel> Update(SPKLUViewModel data)
