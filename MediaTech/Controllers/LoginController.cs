@@ -75,22 +75,21 @@ namespace MediaTech.Controllers
 
                 return Json(hasil);
             }
-            return Json(result);
         }
 
-       
-        public async Task<ActionResult> LogOut()
+
+        public ActionResult LogOut()
         {
-            
+
             foreach (var cookie in Request.Cookies.Keys)
             {
                 if (cookie == ".AspNetCore.Session" || cookie == "OCPPCookie")
                 {
                     Response.Cookies.Delete(cookie);
                 }
-                    
+
             }
-            return RedirectToAction("Index");  
+            return RedirectToAction("Index");
         }
 
 
