@@ -31,12 +31,12 @@ namespace MediaTech.Controllers
         {
             return View();
         }
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
-        }
-        public IActionResult Delete(string id)
-        {
+            long.TryParse(id.FromBase64(), out long ID);
+            var spklu = new SKPLURepo(_db);
+            var result = await spklu.GetByID(ID);
+            if (result.SKPLUID == 0) return NotFound($"Data Not Found");
             return View();
         }
         [Produces("application/json")]
@@ -90,11 +90,14 @@ namespace MediaTech.Controllers
             return BadRequest();
         }
         [Produces("application/json")]
-        [Route("api/SKPLU/Delete/")]
+        [Route("api/SKPLU/Delete/${id}")]
         [HttpPost]
-        public async Task<IActionResult> Delete(SKPLUViewModel model)
+        public async Task<IActionResult> Delete(string id)
         {
+            long.TryParse(id.FromBase64(), out long ID);
             var repo = new SKPLURepo(_db);
+            var model = await repo.GetByID(ID);
+            if (model.SKPLUID == 0) return NotFound($"Data Not Found");
             model.ModifyBy = 1; model.ModifyDate = DateTime.Now;
             if (ModelState.IsValid)
             {
