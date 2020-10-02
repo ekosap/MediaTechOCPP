@@ -1,0 +1,36 @@
+﻿@model MediaTech.ViewModel.UserViewModel
+@using MediaTech.Data;
+@{ int i = 1;}
+@foreach (var item in Model.ListUser)
+{
+<tr>
+    <td>@i</td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Phone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GetUserCreate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StringRole)
+    </td>
+    <td style="justify-content:space-between; display:flex">
+        <button type="button" id="btn-detail" value="@item.UserId" class="btn btn-sm btn-info"><i class="fa fa-search"></i></button>
+        <button type="button" id="btn-edit" value="@item.UserId" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></button>
+        <button type="button" id="btn-hapus" value="@item.UserId" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+    </td>
+</tr>
+    i++;
+}

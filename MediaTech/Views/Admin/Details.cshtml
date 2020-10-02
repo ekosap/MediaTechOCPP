@@ -1,0 +1,90 @@
+﻿@model MediaTech.ViewModel.UserViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">Details</h5>
+</div>
+<div class="modal-body">
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.Address)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.Address)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.Phone)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.Phone)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.Email)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.GetUserCreate)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.ModifyDate)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.ModifyBy)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.GetUserModify)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayName("Role")
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.StringRole)
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.DisplayNameFor(model => model.Status)
+        </div>
+        <div class="col-md-6">
+            @(Model.Status ? "Active" : "Non-Active")
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-bg-dark text-white" id="btn-cancel">Cancel</button>
+</div>

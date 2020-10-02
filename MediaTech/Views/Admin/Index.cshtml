@@ -1,0 +1,147 @@
+﻿@model MediaTech.ViewModel.UserViewModel
+
+@{
+    ViewData["Title"] = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid col-md-12 mt-n20">
+    <div id="alert"></div>
+    <div class="card">
+        <div class="d-flex justify-content-between card-header">
+            <h2>Dashboard Admin Management</h2>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-add" style="width:80px">Add</button>
+        </div>
+        <div class="card-body">
+            <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                           Created Date
+                        </th>
+                        <th>
+                            Created By
+                        </th>
+                        <th>
+                           Role
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="list-data">
+                    @await Html.PartialAsync("_List", Model);
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-input" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        function loadData() {
+            $.ajax({
+                url: '@Url.Action("List")',
+                dataType: 'html',
+                type: 'get',
+                success: function (x) {
+                    $("#list-data").html(x);
+                }
+            });
+        }
+
+
+        $("#btn-add").click(function () {
+            $.ajax({
+                url: '@Url.Action("Add")',
+                dataType: 'html',
+                type: 'get',
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+
+        $(document).on('click', '#btn-cancel', function () {
+            $("#modal-input").modal('hide')
+        })
+
+        $("#modal-input").on("submit", "#form-input", function () {
+            var dataForm = $(this).serialize();
+            $.ajax({
+                url: $(this).attr('action'),
+                data: dataForm,
+                dataType: 'JSON',
+                type: 'POST',
+                success: function (s) {
+                    if (s.success == true) {
+                        $("#modal-input").modal('hide');
+                        $("#alert").fadeOut(5000).html(s.message);
+                        loadData();
+                    }
+                }
+            });
+            return false;
+        });
+
+        $("#list-data").on("click", "#btn-detail", function () {
+            $.ajax({
+                url: '@Url.Action("Details")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+
+         $("#list-data").on("click", "#btn-edit", function () {
+            $.ajax({
+                url: '@Url.Action("Edit")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+    </script>
+
+}
+
+

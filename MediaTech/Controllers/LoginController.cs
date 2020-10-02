@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using System.Text.RegularExpressions;
 
 namespace MediaTech.Controllers
 {
@@ -56,6 +57,13 @@ namespace MediaTech.Controllers
                 HttpContext.Session.SetString("Role", sessionuser.RoleId.ToString());
                 HttpContext.Session.SetString("StringRole", sessionuser.StringRole);
                 HttpContext.Session.SetString("Email", sessionuser.Email);
+
+
+                var input = sessionuser.Name;
+                var FirstName = Regex.Replace(input.Split()[0], @"[^0-9a-zA-Z\ ]+", "");
+                HttpContext.Session.SetString("FirstName", FirstName);
+                string FirstCharacter = input.Substring(0, 1);
+                HttpContext.Session.SetString("FirstCharacter", FirstCharacter);
 
                 var claims = new List<Claim>
                 {

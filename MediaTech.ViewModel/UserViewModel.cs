@@ -27,5 +27,7 @@ namespace MediaTech.ViewModel
         public List<UserViewModel> ListUser { get; set; }
 
         public string StringRole { get; set; }
+        public string GetUserModify { get; set; }
+        public string GetUserCreate { get; set; }
     }
 }

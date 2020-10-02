@@ -8,9 +8,11 @@ using Microsoft.Extensions.Logging;
 using MediaTech.Repo;
 using MediaTech.ViewModel;
 using MediaTech.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MediaTech.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
