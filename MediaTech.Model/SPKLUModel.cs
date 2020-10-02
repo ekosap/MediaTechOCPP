@@ -17,7 +17,9 @@ namespace MediaTech.Model
         public DateTime? ModifyDate { get; set; }
         public int ModifyBy { get; set; }
         public bool Status { get; set; }
-        public bool IsACType { get; set; }
+        public int SocketType { get; set; }
         public string Alamat { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
     }
 }

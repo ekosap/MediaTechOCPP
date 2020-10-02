@@ -26,7 +26,7 @@ namespace MediaTech.Repo
                 Alamat = x.Alamat,
                 CreatedBy = x.CreatedBy,
                 CreatedDate = x.CreatedDate,
-                IsACType = x.IsACType,
+                SocketType = x.SocketType,
                 ModifyBy = x.ModifyBy,
                 ModifyDate = x.ModifyDate,
                 SPKLUId = x.SPKLUId,
@@ -47,7 +47,7 @@ namespace MediaTech.Repo
                 hasil.Alamat = data.Alamat;
                 hasil.CreatedBy = data.CreatedBy;
                 hasil.CreatedDate = data.CreatedDate;
-                hasil.IsACType = data.IsACType;
+                hasil.SocketType = data.SocketType;
                 hasil.ModifyBy = data.ModifyBy;
                 hasil.ModifyDate = data.ModifyDate;
             }
@@ -59,14 +59,14 @@ namespace MediaTech.Repo
             {
                 try
                 {
-                    var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName) && x.IsACType == data.IsACType).ToListAsync();
+                    var dataDB = await _db.SPKLU.Where(x => x.SPKLUName.Contains(data.SPKLUName) && x.SocketType == data.SocketType).ToListAsync();
                     if (dataDB.Count > 0) { await trans.RollbackAsync(); return new MetadataViewModel() { Code = 201, Message = "Duplication Data" }; }
                     SPKLUModel dataSKPLU = new SPKLUModel()
                     {
                         Alamat = data.Alamat,
                         CreatedBy = data.CreatedBy,
                         CreatedDate = data.CreatedDate,
-                        IsACType = data.IsACType,
+                        SocketType = data.SocketType,
                         SPKLUName = data.SPKLUName,
                         Status = data.Status
                     };
@@ -75,12 +75,12 @@ namespace MediaTech.Repo
 
                     foreach (JamOperationalViewModel item in data.ListJamOperational)
                     {
-                        _db.JamOperation.Add(new JamOperasionalModal() { 
-                            FinishAt = item.FinishAt,
-                            StartAt = item.StartAt,
-                            SKPLUID = dataSKPLU.SPKLUId
-                        });
-                        await _db.SaveChangesAsync();
+                        //_db.JamOperation.Add(new JamOperasionalModal() { 
+                        //    FinishAt = item.FinishAt,
+                        //    StartAt = item.StartAt,
+                        //    SKPLUID = dataSKPLU.SPKLUId
+                        //});
+                        //await _db.SaveChangesAsync();
                     }
 
                     await trans.CommitAsync();
@@ -104,7 +104,7 @@ namespace MediaTech.Repo
                 dataDB.Alamat = data.Alamat;
                 dataDB.ModifyBy = data.ModifyBy;
                 dataDB.ModifyDate = data.ModifyDate;
-                dataDB.IsACType = data.IsACType;
+                dataDB.SocketType = data.SocketType;
                 dataDB.SPKLUName = data.SPKLUName;
                 dataDB.Status = data.Status;
                 await _db.SaveChangesAsync();

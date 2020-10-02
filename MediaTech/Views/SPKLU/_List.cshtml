@@ -20,7 +20,7 @@
             @(item.Status? "Active" : "Non-Active")
         </td>
         <td>
-            @(item.IsACType?"AC Type":"DC Type")
+            @item.SocketType
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Alamat)

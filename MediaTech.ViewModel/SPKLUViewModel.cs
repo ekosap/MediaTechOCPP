@@ -19,7 +19,7 @@ namespace MediaTech.ViewModel
         [DisplayName("SPKLU Status")]
         public bool Status { get; set; }
         [DisplayName("SPKLU Type")]
-        public bool IsACType { get; set; }
+        public int SocketType { get; set; }
         [DisplayName("SPKLU Address")]
         public string Alamat { get; set; }
         [DisplayName("Map Location")]

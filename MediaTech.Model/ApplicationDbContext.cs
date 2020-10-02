@@ -17,6 +17,5 @@ namespace MediaTech.Model
         public DbSet<UserModel> User { get; set; }
         public DbSet<SPKLUModel> SPKLU { get; set; }
         public DbSet<UserLocationModel> UserLocation { get; set; }
-        public DbSet<JamOperasionalModal> JamOperation { get; set; }
     }
 }
