@@ -37,7 +37,7 @@ namespace MediaTech.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> List()
+        public IActionResult List()
         {
             var repo = new UserRepo(db);
             var result = repo.GetUserAdmin();
@@ -52,7 +52,7 @@ namespace MediaTech.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(UserViewModel model)
+        public IActionResult Add(UserViewModel model)
         {
             var repo = new UserRepo(db);
             model.CreatedBy = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
@@ -60,7 +60,7 @@ namespace MediaTech.Controllers
             if (ModelState.IsValid)
             {
                 var result = repo.Insert(model);
-                if(result == true)
+                if (result == true)
                 {
                     var hasil = new
                     {
@@ -83,7 +83,7 @@ namespace MediaTech.Controllers
             return PartialView(model);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
             UserViewModel result = new UserViewModel();
             if (id == 0) return View(result);
@@ -93,7 +93,7 @@ namespace MediaTech.Controllers
             return PartialView(result);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             UserViewModel result = new UserViewModel();
             if (id == 0) return View(result);
@@ -105,7 +105,7 @@ namespace MediaTech.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(UserViewModel model)
+        public IActionResult Edit(UserViewModel model)
         {
             var repo = new UserRepo(db);
             model.ModifyBy = model.CreatedBy = Convert.ToInt32(HttpContext.Session.GetString("UserId"));

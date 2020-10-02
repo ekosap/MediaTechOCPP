@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "SKPLU Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid col-md-12 mt-n20">
+    <div id="alert"></div>
+    <div class="card">
+        <div class="d-flex justify-content-between card-header">
+            <h2>Dashboard SKPLU Management</h2>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-add" style="width:80px">Add</button>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered" id="tb_detail">
+                <thead>
+                    <tr>
+                        <th>
+                            SKPLU Name
+                        </th>
+                        <th>
+                            Created Date
+                        </th>
+                        <th>
+                            Created By
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Socket Type
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th align="center"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var datatable;
+        $(document).ready(function () {
+            LoadData();
+        });
+        function LoadData() {
+            datatable = $('#tb_detail').DataTable({
+                "ajax": {
+                    "url": '/api/SKPLU',
+                    "dataSrc": "",
+                    "type": 'GET',
+                    "dataType": 'JSON',
+                },
+                "columns": [
+                    { "data": "spkluName" },
+                    { "data": "createdDate" },
+                    { "data": "createdBy" },
+                    { "data": "status" },
+                    { "data": "socketType" },
+                    { "data": "alamat" },
+                    {
+                        "data": "spkluId",
+                        "render": function (x) {
+                            return `<div class="text-center"><button type="button" id="btn-detail" value="${btoa(x)}" class="btn btn-sm btn-info"><i class="fa fa-search"></i></button>
+            <button type="button" id="btn-edit" value="${btoa(x)}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></button>
+            <button type="button" id="btn-hapus" value="${btoa(x)}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></div>`
+                        }
+                    }
+                ],
+                "language": {
+                    "emptyTable":"Data not found"
+                }
+            })
+        }
+    </script>
+}
+

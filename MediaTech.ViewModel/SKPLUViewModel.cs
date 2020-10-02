@@ -6,12 +6,8 @@ using System.Text;
 
 namespace MediaTech.ViewModel
 {
-    public class SPKLUViewModel
+    public class SKPLUViewModel
     {
-        public int SPKLUId { get; set; }
-        [DisplayName("SPKLU Name")]
-        [Required]
-        public string SPKLUName { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? ModifyDate { get; set; }
@@ -25,6 +21,13 @@ namespace MediaTech.ViewModel
         [DisplayName("Map Location")]
         public string MapLocation { get; set; }
         [DisplayName("Operational Time")]
-        public List<JamOperationalViewModel> ListJamOperational { get; set; }
+        public int SKPLUID { get; set; }
+        [DisplayName("SPKLU Name")]
+        [Required]
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public int Interval { get; set; }
     }
 }

@@ -81,7 +81,7 @@ namespace MediaTech.Repo
                 db.SaveChanges();
                 result = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 result = false;
 
@@ -137,7 +137,7 @@ namespace MediaTech.Repo
                 db.SaveChanges();
                 result = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 result = false;
             }
