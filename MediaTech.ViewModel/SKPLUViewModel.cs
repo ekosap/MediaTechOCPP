@@ -16,18 +16,25 @@ namespace MediaTech.ViewModel
         public bool Status { get; set; }
         [DisplayName("SPKLU Type")]
         public int SocketType { get; set; }
-        [DisplayName("SPKLU Address")]
         public string Alamat { get; set; }
         [DisplayName("Map Location")]
         public string MapLocation { get; set; }
-        [DisplayName("Operational Time")]
+        
         public int SKPLUID { get; set; }
         [DisplayName("SPKLU Name")]
         [Required]
         public string Name { get; set; }
+        [DisplayName("SPKLU Address")]
+        [Required]
         public string Address { get; set; }
+        [DisplayName("Open Operational Time")]
+        [Required]
         public TimeSpan StartTime { get; set; }
+        [DisplayName("Close Operational Time")]
+        [Required]
         public TimeSpan EndTime { get; set; }
+        [DisplayName("Interval Operational Time")]
+        [Required][Range(1,60, ErrorMessage ="Data must in range 1 to 60")]
         public int Interval { get; set; }
     }
 }

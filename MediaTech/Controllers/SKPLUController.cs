@@ -29,7 +29,8 @@ namespace MediaTech.Controllers
         }
         public IActionResult Add()
         {
-            return View();
+            SKPLUViewModel model = new SKPLUViewModel();
+            return PartialView("_Add", model);
         }
         public async Task<IActionResult> Edit(string id)
         {

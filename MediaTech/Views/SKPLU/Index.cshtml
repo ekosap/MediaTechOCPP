@@ -40,6 +40,13 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-input" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
 @section Scripts{
     <script>
         var datatable;
@@ -55,14 +62,31 @@
                     "dataType": 'JSON',
                 },
                 "columns": [
-                    { "data": "spkluName" },
-                    { "data": "createdDate" },
+                    { "data": "name" },
+                    {
+                        "data": "createdDate",
+                        "render": function (data, type, row) {
+                            // If display or filter data is requested, format the date
+                            if (type === 'display' || type === 'filter') {
+                                var rowvalueallday = row["createdDate"];
+                                if (rowvalueallday == 0) {
+                                    return (moment(data).format("DD-MM-YYYY (HH:mm)"));
+                                } else {
+                                    return (moment(data).format("DD-MM-YYYY"));
+                                }
+                            }
+                            // Otherwise the data type requested (`type`) is type detection or
+                            // sorting data, for which we want to use the raw date value, so just return
+                            // that, unaltered
+                            return data;
+                        }
+                    },
                     { "data": "createdBy" },
                     { "data": "status" },
                     { "data": "socketType" },
-                    { "data": "alamat" },
+                    { "data": "address" },
                     {
-                        "data": "spkluId",
+                        "data": "skpluid",
                         "render": function (x) {
                             return `<div class="text-center"><button type="button" id="btn-detail" value="${btoa(x)}" class="btn btn-sm btn-info"><i class="fa fa-search"></i></button>
             <button type="button" id="btn-edit" value="${btoa(x)}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></button>
@@ -75,6 +99,87 @@
                 }
             })
         }
+        $("#btn-add").click(function () {
+            $.ajax({
+                url: '@Url.Action("Add")',
+                dataType: 'html',
+                type: 'get',
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-detail", function () {
+            $.ajax({
+                url: '@Url.Action("Details")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-edit", function () {
+            $.ajax({
+                url: '@Url.Action("Edit")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#list-data").on("click", "#btn-hapus", function () {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                dataType: 'html',
+                type: 'get',
+                data: { id: $(this).val() },
+                success: function (x) {
+                    $("#modal-input").find(".modal-dialog").removeClass("modal-sm");
+                    $("#modal-input").find(".modal-dialog").addClass("modal-lg");
+                    $("#modal-input").find(".modal-content").html(x);
+                    $("#modal-input").modal('show');
+                }
+            });
+        });
+        $("#modal-input").on("click", "#btn-cancel", function () {
+            $("#modal-input").modal('hide');
+        });
+        $("#modal-input").on("submit", "#form-input", function () {
+            //alert($(this).attr('action')); return false;
+            var dataForm = $(this).serialize();
+            $.ajax({
+                url: $(this).attr('action'),
+                data: dataForm,
+                dataType: 'JSON',
+                type: 'POST',
+                success: function (s) {
+                    if (s.success) {
+                        $("#modal-input").modal('hide');
+                        //$("#alert").addClass(data.vclass);
+                        $("#alert").fadeOut(5000).html(s.message);
+                       LoadData();
+                    }
+                    else {
+                        $("#modal-input").find(".modal-content").html(data);
+                        $("#modal-input").modal('show');
+                    }
+                }
+            });
+            return false;
+        });
     </script>
 }
 

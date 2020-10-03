@@ -31,7 +31,11 @@ namespace MediaTech.Repo
                 ModifyDate = x.ModifyDate,
                 SKPLUID = x.SKPLUID,
                 Name = x.Name,
-                Status = x.Status
+                Status = x.Status,
+                StartTime = x.StartTime,
+                EndTime = x.EndTime,
+                MapLocation = x.MapLocation,
+                Interval = x.Interval
             }).ToList();
             return hasil;
         }
@@ -50,6 +54,10 @@ namespace MediaTech.Repo
                 hasil.SocketType = data.SocketType;
                 hasil.ModifyBy = data.ModifyBy;
                 hasil.ModifyDate = data.ModifyDate;
+                hasil.Address = data.Address;
+                hasil.EndTime = data.EndTime;
+                hasil.Interval = data.Interval;
+                hasil.MapLocation = data.MapLocation;
             }
             return hasil;
         }
@@ -68,7 +76,11 @@ namespace MediaTech.Repo
                         CreatedDate = data.CreatedDate,
                         SocketType = data.SocketType,
                         Name = data.Name,
-                        Status = data.Status
+                        Status = data.Status,
+                        StartTime = data.StartTime,
+                        EndTime = data.EndTime,
+                        Interval = data.Interval,
+                        MapLocation =data.MapLocation
                     };
                     _db.SKPLU.Add(dataSKPLU);
                     await _db.SaveChangesAsync();
